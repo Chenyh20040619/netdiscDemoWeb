@@ -161,11 +161,14 @@ export default {
       }
 
       this.isLoading = true;
-      console.log("111")
-      this.$axios.post('http://localhost:8080/toLogin', this.formLogin)
+      this.$axios({
+        url: 'http://localhost:8080/toLogin',
+        method: 'post',
+        data: this.formLogin
+      })
       .then(res=>{
         this.loginLoading = false
-        this.$router.push({name: 'Home', params: {user: res.data}})
+        this.$router.push({name: 'Home', query: {user: res.data}})
       })
     },
 
@@ -183,10 +186,16 @@ export default {
         email: this.formRegister.email,
       })
         .then(res=>{
-          this.loginLoading = false
-          this.handleTab(0)
+          if (res.data == true){
+            this.$message.success("注册成功!")
+            this.loginLoading = false
+            this.handleTab(0)
+          }else {
+            this.$message.error("注册失败！")
+            this.loginLoading = false
+            this.handleTab(0)
+          }
         })
-
     },
 
     setCookie(id, password, exdays) {

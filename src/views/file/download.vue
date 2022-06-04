@@ -43,7 +43,15 @@
       </el-aside>
       <el-main>
         <div>
-          关于我们
+          <el-input v-model="path" placeholder="请输入下载文件路径" style="width: 10%;font-size: 15px;color: #2c2e33;"></el-input>
+          <el-button v-on:click="download" style="color: #fff;background-color: rgb(21, 47, 72);border-color: rgb(21, 47, 72);">立即下载</el-button>
+        </div>
+        <div style="padding: 20px">
+          <el-input
+            type="textarea"
+            :rows="10"
+            v-model="downloadText">
+          </el-input>
         </div>
       </el-main>
     </el-container>
@@ -52,7 +60,6 @@
 
 <script>
 export default {
-  name: "Home",
   data: function (){
     return {
       user: {
@@ -61,14 +68,48 @@ export default {
         password: this.$route.query.user.password,
         email: this.$route.query.user.email
       },
+      path:"",
+      downloadText: ''
     }
   },
   methods: {
     logout() {
       this.$router.push('/')
       window.sessionStorage.clear()
+    },
+    download(){
+      if (this.path == ""){
+        alert("请输入下载文件路径")
+        return
+      }
+      const loading = this.$loading({
+        lock: true,
+        text: '正 在 下 载. . .',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.76)'
+      });
+      this.$axios.get('http://localhost:8080/download', {
+        params: {
+          path: "/"+this.user.username+"/"+this.path
+        },
+      }).then(res=>{
+        console.log(res)
+        if (res.data != ''){
+          this.downloadText = res.data
+          loading.close()
+          this.$message.success("成功下载")
+          this.path = ""
+        } else {
+          this.$message.error("下载失败")
+          loading.close()
+          this.path = ""
+        }
+      })
     }
   },
+  name: "download",
 }
 </script>
+<style>
 
+</style>

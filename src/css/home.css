@@ -1,0 +1,33 @@
+.home-container {
+  height: 100%;
+}
+.el-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #373d41;
+}
+.main-container {
+  height: 100%;
+  overflow: hidden;
+}
+.toggle-btn {
+  line-height: 30px;
+  background-color: #4a5064;
+  font-size: 10px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+.el-menu {
+  border-right: none;
+}
+.el-aside {
+  background-color: #333744;
+}
+.iconfont {
+  margin: 0 10px;
+}
+.el-main {
+  background-color: #eaedf1;
+}

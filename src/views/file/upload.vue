@@ -42,9 +42,15 @@
         </el-menu>
       </el-aside>
       <el-main>
-        <div>
-          关于我们
-        </div>
+        <el-input v-model="path" placeholder="请输入上传路径" style="width: 10%;font-size: 15px;color: #2c2e33;"></el-input>
+        <el-upload
+          :multiple="false"
+          :show-file-list="false"
+          :http-request="uploadExcel"
+          action="string"
+        >
+          <el-button size="small" type="primary">上传文件</el-button>
+        </el-upload>
       </el-main>
     </el-container>
   </el-container>
@@ -52,7 +58,8 @@
 
 <script>
 export default {
-  name: "Home",
+  name: "upload",
+
   data: function (){
     return {
       user: {
@@ -61,14 +68,49 @@ export default {
         password: this.$route.query.user.password,
         email: this.$route.query.user.email
       },
+      path: ""
     }
   },
   methods: {
+
     logout() {
       this.$router.push('/')
       window.sessionStorage.clear()
+    },
+    uploadExcel(param) {
+      console.log(this.path)
+      console.log(param.file)
+      if (this.path == ""){
+        this.$message.error("请输入上传路径!")
+        return
+      }
+      const loading = this.$loading({
+        lock: true,
+        text: '正 在 上 传. . .',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.76)'
+      });
+      this.$axios({
+        url: 'http://localhost:8080/upload',
+        method: 'post',
+        data: {path: "/"+this.user.username+"/"+this.path, file: param.file},
+        headers: { 'Content-Type': 'multipart/form-data' },
+      }).then(res=>{
+        console.log(res)
+        console.log('已经上传')
+        if (res.data == true){
+          loading.close()
+          this.$message.success("上传成功!")
+          this.path = ""
+        } else {
+          this.$message.error("上传失败!")
+          this.path = ""
+        }
+      })
     }
+
   },
 }
 </script>
+
 

@@ -42,9 +42,26 @@
         </el-menu>
       </el-aside>
       <el-main>
-        <div>
-          关于我们
-        </div>
+        <el-form
+          :model="ruleForm"
+          status-icon
+          :rules="rules"
+          label-width="100px"
+          class="demo-ruleForm"
+          style="width:350px"
+        >
+          <el-form-item label="用户名" prop="username">
+            <el-input type="text" v-model="ruleForm.username" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="电子邮箱" prop="email">
+            <el-input type="text" v-model="ruleForm.email" autocomplete="off"></el-input>
+          </el-form-item>
+
+          <el-form-item>
+            <el-button type="primary" @click="submitForm">提交</el-button>
+            <el-button @click="resetForm" style="color: #fff;background-color: rgb(21, 47, 72);border-color: rgb(21, 47, 72);">重置</el-button>
+          </el-form-item>
+        </el-form>
       </el-main>
     </el-container>
   </el-container>
@@ -52,8 +69,15 @@
 
 <script>
 export default {
-  name: "Home",
   data: function (){
+    const validateEmail = (rule, value, callback) => {
+      var reg = /^[\w-]{3,12}@[\da-zA-Z]{2,6}\.[da-zA-Z]+$/;
+      if (!value.match(reg)) {
+        callback(new Error("电子邮箱格式不正确"));
+      } else {
+        callback();
+      }
+    };
     return {
       user: {
         id: this.$route.query.user.id,
@@ -61,14 +85,57 @@ export default {
         password: this.$route.query.user.password,
         email: this.$route.query.user.email
       },
+      ruleForm: {
+        username: "",
+        email: ""
+      },
+      rules: {
+        username: [
+          {
+            required: true,
+            message: "用户名不能为空",
+            trigger: "blur"
+          },
+        ],
+        email: [
+          {
+            required: true,
+            message: "电子邮箱不能为空",
+            trigger: "blur"
+          },
+          // blur鼠标移出时候效验，change,输入改变的时候进行效验
+          {validator: validateEmail, trigger: "blur"}
+        ]
+      },
     }
   },
   methods: {
     logout() {
       this.$router.push('/')
       window.sessionStorage.clear()
+    },
+    submitForm() {
+      this.$axios({
+        url: 'http://localhost:8080/updateUser',
+        method: 'post',
+        data: {id: this.user.id, username: this.ruleForm.username, email: this.ruleForm.email},
+      }).then(res=>{
+        if (res.data == 1){
+          this.$message.success("修改成功")
+          this.user.username = this.ruleForm.username
+          this.user.email = this.ruleForm.email
+          this.resetForm()
+        } else {
+          this.$message.error("修改失败")
+        }
+      })
+    },
+    resetForm(){
+      this.ruleForm.username = ''
+      this.ruleForm.email = ''
     }
   },
+  name: "updateUser",
 }
 </script>
 

@@ -20,6 +20,31 @@ export default new Router({
       path: '/Home',
       name: 'Home',
       component: () => import('../views/Home.vue'),
-    }
+    },
+    {
+      path: '/upload',
+      name: 'upload',
+      component: () => import('../views/file/upload.vue'),
+    },
+    {
+      path: '/download',
+      name: 'download',
+      component: () => import('../views/file/download.vue'),
+    },
+    {
+      path: '/deleteUser',
+      name: 'deleteUser',
+      component: () => import('../views/user/deleteUser.vue'),
+    },
+    {
+      path: '/updateUser',
+      name: 'updateUser',
+      component: () => import('../views/user/updateUser.vue'),
+    },
+    {
+      path: '/resetPassword',
+      name: 'resetPassword',
+      component: () => import('../views/user/resetPassword.vue'),
+    },
   ]
 })

@@ -11,6 +11,7 @@ import Valid from './utils/valid'
 import "./css/login.css"
 import "./css/home.css"
 import "./css/base.css"
+import "./js/stack.js"
 Vue.use(ElementUI);
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false

@@ -190,6 +190,18 @@ export default {
             this.$message.success("注册成功!")
             this.loginLoading = false
             this.handleTab(0)
+
+            this.$axios({
+              url: 'http://localhost:8080/file/mkdir',
+              method: 'post',
+              data: {srcPath: '/'+this.formRegister.username},
+            }).then(res=>{
+              if (res.data == true){
+              } else {
+                this.$message.error("初始化用户失败!")
+              }
+            })
+
           }else {
             this.$message.error("注册失败！")
             this.loginLoading = false

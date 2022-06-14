@@ -2,7 +2,7 @@
   <el-container class="home-container">
     <el-header>
       <div>
-        <span>Hello! {{user.username}}</span>
+        <span>基于HDFS的分布式文件管理系统</span>
       </div>
       <el-button type="info" @click="logout">退出</el-button>
     </el-header>
@@ -92,6 +92,7 @@ export default {
     logout() {
       this.$router.push('/')
       window.sessionStorage.clear()
+      location.reload();
     },
     submitForm() {
       if (this.user.password == this.ruleForm.password){

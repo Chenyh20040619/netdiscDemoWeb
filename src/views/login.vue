@@ -1,6 +1,6 @@
 <template>  <div class="login-container">
   <div class="pageHeader">
-    <span>网盘Test</span>
+    <span>基于HDFS的分布式文件管理系统</span>
   </div>
 
   <div class="login-box">

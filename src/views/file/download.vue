@@ -2,7 +2,7 @@
   <el-container class="home-container">
     <el-header>
       <div>
-        <span>Hello! {{user.username}}</span>
+        <span>基于HDFS的分布式文件管理系统</span>
       </div>
       <el-button type="info" @click="logout">退出</el-button>
     </el-header>
@@ -150,8 +150,10 @@ export default {
     logout() {
       this.$router.push('/')
       window.sessionStorage.clear()
+      location.reload();
     },
     back(){
+      this.fileName = ''
       if (this.top > 1){
         this.dataStore.pop()
         this.top--
@@ -172,6 +174,7 @@ export default {
       }
     },
     into(){
+      this.fileName = ''
       let temp = this.path.endsWith('/') ? this.path+this.deleteItem : this.path+'/'+this.deleteItem
       this.dataStore.push(temp)
       this.top++
@@ -192,6 +195,7 @@ export default {
     },
     selectItem(item){
       this.deleteItem=item
+      this.fileName = item
     },
     addDir(){
       this.dialogVisibleAdd = false
@@ -253,11 +257,9 @@ export default {
           this.downloadText = res.data
           loading.close()
           this.$message.success("成功下载")
-          this.path = ""
         } else {
           this.$message.error("下载失败")
           loading.close()
-          this.path = ""
         }
       })
     }

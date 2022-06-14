@@ -67,12 +67,12 @@
         </el-input>
 <!--        显示目录结构-->
         <div id="dir">
-          <div v-for="(item, index) in this.filenames" :key="index" style="border:2px solid #bebebe; position: relative" @click="selectItem(item)">
+          <div v-for="(item, index) in this.filenames" :key="index" v-on:dblclick="into" style="border:2px solid #bebebe; position: relative" @click="selectItem(item)">
             <el-button type="text" style="color: #2c2e33" icon="el-icon-folder">
-              <div style="color: #333744" v-on:dblclick="into">{{item}}</div>
+              <div style="color: #333744">{{item}}</div>
             </el-button>
 <!--            删除-->
-            <el-button type="text">
+            <el-button type="text" style="position: fixed;right: 2vw">
               <div>
                 <i class="el-icon-delete" style="color: red;" @click="dialogVisibleDelete = true"/>
               </div>
@@ -149,6 +149,7 @@ export default {
     logout() {
       this.$router.push('/')
       window.sessionStorage.clear()
+      location.reload();
     },
     back(){
       if (this.top > 1){

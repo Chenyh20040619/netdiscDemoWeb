@@ -1,4 +1,5 @@
-<template>  <div class="login-container">
+<template>
+  <div class="login-container">
   <div class="pageHeader">
     <span>基于HDFS的分布式文件管理系统</span>
   </div>

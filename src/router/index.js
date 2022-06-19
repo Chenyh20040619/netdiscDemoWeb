@@ -22,11 +22,6 @@ export default new Router({
       component: () => import('../views/Home.vue'),
     },
     {
-      path: '/upload',
-      name: 'upload',
-      component: () => import('../views/file/upload.vue'),
-    },
-    {
       path: '/download',
       name: 'download',
       component: () => import('../views/file/download.vue'),

@@ -21,8 +21,7 @@
               <i class="el-icon-location"/>
               <span>文件管理</span>
             </template>
-            <el-menu-item index="/upload" :route="{name:'upload',query:{user: this.user}}">文件上传</el-menu-item>
-            <el-menu-item index="/download" :route="{name:'download',query:{user: this.user}}">文件下载</el-menu-item>
+            <el-menu-item index="/download" :route="{name:'download',query:{user: this.user}}">文件编辑</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
@@ -36,14 +35,14 @@
           <el-menu-item index="/Home" :route="{name:'Home',query:{user: this.user}}">
             <template slot="title">
               <i class="el-icon-sunny"/>
-              <span>关于我们</span>
+              <span>使用说明</span>
             </template>
           </el-menu-item>
         </el-menu>
       </el-aside>
       <el-main>
         <div>
-          关于我们
+          使用说明
         </div>
       </el-main>
     </el-container>

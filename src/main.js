@@ -10,8 +10,19 @@ import Valid from './utils/valid'
 
 import "./css/login.css"
 import "./css/home.css"
+import "./css/video.css"
 import "./css/base.css"
 import "./js/stack.js"
+
+import VueVideoPlayer from 'vue-video-player';
+import 'video.js/dist/video-js.css';
+Vue.use(VueVideoPlayer);
+require.config({
+  paths : {
+    "jquery" : ["http://libs.baidu.com/jquery/2.0.3/jquery"]
+  }
+})
+
 Vue.use(ElementUI);
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false

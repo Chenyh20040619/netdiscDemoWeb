@@ -1,3 +1,18 @@
+.video-js .vjs-icon-placeholder {
+  width: 80%;
+  height: 80%;
+  display: block;
+}
+.videoPlayer /deep/ .el-dialog,
+.el-pager li {
+  background: none !important;
+  margin-top: 6vh !important;
+}
+.my-img:hover{
+  cursor:pointer;
+}
+
+
 .login-container {
   background-image: url('../assets/bg.png');
   background-size: cover;
@@ -137,15 +152,7 @@ input:focus {
 ::-webkit-scrollbar {
   width: 10px;
 }
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.3);
-  border-radius: 8px;
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
-}
+
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(0, 0, 0, 0.4);
 }

@@ -1,0 +1,35 @@
+.videoWrap {
+  width: 100%;
+  height: calc(100vh - 100px);
+}
+
+.videoWrap video{
+  object-fit: fill;
+}
+
+.videoWrap .video-js .vjs-big-play-button {
+  border-width: 3px;
+  border-color: rgb(255, 255, 255);
+  border-style: solid;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  line-height: 50px;
+  background-color: rgba(0,0,0,0);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.videoWrap .video-js .vjs-control-bar{
+  background-color: rgba(43, 51, 63, 0);
+}
+.videoWrap .video-js .vjs-play-progress{
+  background-color: rgb(238,191,0);
+}
+.videoWrap .video-js .vjs-load-progress div{
+  background-color: rgb(255, 255, 255);
+}
